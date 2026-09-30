@@ -1,0 +1,6 @@
+#!/bin/bash 
+read -p " enter the name " name 
+if [[ "$name" == "sushant" ]] then 
+echo " hello, $name" 
+fi 
+
