@@ -1,0 +1,17 @@
+#!/bin/bash
+set -euo pipefail
+
+tmp=$(mktemp -d)
+
+cleanup() {
+  echo "cleaning $tmp"
+  rm -rf "$tmp"
+}
+
+trap cleanup INT EXIT TERM
+
+echo "temp dir is $tmp"
+touch "$tmp/data.txt"
+echo "sleeping..."
+sleep 5
+echo "work done"
