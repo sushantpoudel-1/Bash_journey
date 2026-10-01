@@ -1,9 +1,5 @@
 #!/bin/bash
-
-mkdir -p backups
-
-log="backup.log"
-
+mkdir -p backups 
 read -r file
 
 if [ -d "$file" ]; then
@@ -19,22 +15,15 @@ if [ -d "$file" ]; then
     status="$?"
 
     if [ "$status" -ne 0 ]; then
-
         echo "backup couldn't be completed"
-        echo "$(date) - Backup of $folder failed" >> "$log"
-
     else
-
         echo "backup is successfully completed"
-        echo "$(date) - Backup of $folder completed successfully" >> "$log"
 
         ls -t backups/ | tail -n +6 | xargs -i {} rm "backups/{}"
-
     fi
 
 else
 
     echo "the folder doesn't exist. Create one"
-    echo "$(date) - Backup failed: $folder doesn't exist" >> "$log"
 
 fi
