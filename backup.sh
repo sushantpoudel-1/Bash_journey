@@ -18,6 +18,8 @@ if [ -d "$file" ]; then
         echo "backup couldn't be completed"
     else
         echo "backup is successfully completed"
+
+        ls -t backups/ | tail -n +6 | xargs -i {} rm "backups/{}"
     fi
 
 else
