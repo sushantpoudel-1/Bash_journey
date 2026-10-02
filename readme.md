@@ -78,4 +78,68 @@ tail
 xargs
 rm
 
+#mistakes :
+## 🐜 Issues & Mistakes I Faced
 
+### 1. Incorrect `tar` command
+
+My attempt:
+
+```bash
+
+tar -xzvf docs.tar.gz -c backup_test
+
+```
+
+It caused an error due to combination of options `-x` and `-c`
+
+What I have learned:
+
+Option `-c` is used for creation, `-x` for extraction
+
+---
+
+### 2. Problem with `xargs` command in backup
+
+At first, I faced some problems with configuring my `xargs` command due to path issues.
+
+Later, I managed to simplify my command in the following way:
+
+```bash
+
+ls -t backups/.tar.gz | tail -n +6 | xargs rm
+
+```
+
+What I have learned:
+
+Depending on how we pass the data to `xargs` our file paths will be interpreted
+
+---
+
+### 3. `tail -n +6` command misunderstanding
+
+At first, I didn't know what `+6` was about.
+
+However, then I found out that using:
+
+```bash
+
+tail -n +6
+
+```
+
+I'm telling the script to start deleting from the 6th backup
+
+---
+
+### 4. `backup.log` command misunderstanding
+
+At first, I thought that I need to create `backup.log` myself
+
+However, using the command:
+
+
+echo "message" >> backup.log
+
+I will create the file automatically if it doesn't exist in the system
