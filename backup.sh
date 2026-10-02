@@ -1,10 +1,16 @@
 #!/bin/bash
 
+
+
+if [ -z "$1" ] || [ -z "$1" ] ; then
+echo " usage:  enter a valid arguments  "
+exit 1
+fi
+
 mkdir -p backups
 
-log="backup.log"
 
-read -r file
+file="$1"
 
 if [ -d "$file" ]; then
 
@@ -21,20 +27,17 @@ if [ -d "$file" ]; then
     if [ "$status" -ne 0 ]; then
 
         echo "backup couldn't be completed"
-        echo "$(date) - Backup of $folder failed" >> "$log"
-
+echo "$(date '+%Y-%m-%d %H:%M:%S') - Backup of $folder completed successfully" >> "$log"
     else
 
         echo "backup is successfully completed"
         echo "$(date) - Backup of $folder completed successfully" >> "$log"
 
-        ls -t backups/ | tail -n +6 | xargs -i {} rm "backups/{}"
-
+ls -t backups/*.tar.gz | tail -n +6 | xargs rm
     fi
 
 else
 
     echo "the folder doesn't exist. Create one"
-    echo "$(date) - Backup failed: $folder doesn't exist" >> "$log"
-
+echo "$(date '+%Y-%m-%d %H:%M:%S') - Backup of $folder failed" >> "$log"
 fi
