@@ -1,0 +1,4 @@
+#!/bin/bash  
+memusage=$(free -h | awk '$1 == "Mem:" {print "total:", $2, "free:", $4, "used:", $3}')
+echo " the total memoryused is : $memusage " 
+

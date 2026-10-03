@@ -1,0 +1,5 @@
+#!/bin/bash 
+cpuusage=$( free -h | grep Mem | awk '{print $2, $3, $4}')
+echo " the memory usage is " 
+echo "memory usage : $cpuusage"
+
