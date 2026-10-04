@@ -8,15 +8,23 @@ if systemctl list-unit-files --type=service | grep -q "$service.service"; then
     echo "Service exists"
 else
     echo "Service does not exist"
-exit 1 
-fi
+exit 1
+fi 
+echo "" 
+echo ""
 check=$(systemctl is-active "$service" )
 if [ "$check" == "active" ]; then
 echo "service:$service"
+echo ""
 echo "status:$check"
 else 
 echo "service:$service"
-echo "status:$check"
+systemctl restart "$service"
+status="$?"
+if [ "$status" -eq 0 ]; then
+    echo "Service successfully restarted"
+else
+    echo "Failed to restart service"
+    exit 1
 fi
-
-
+fi
