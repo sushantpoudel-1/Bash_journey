@@ -1,5 +1,5 @@
 
-#!/bin/bash  
+#!/bin/bash         
 echo ""
 echo "         SYSTEM HEALTH MONITOR " 
 echo ""
@@ -14,11 +14,17 @@ echo ""
 echo ""
 memusage=$(free -h | awk '$1 == "Mem:" {print "total:", $2, "free:", $4, "used:", $3}')
 echo " Memory : $memusage " 
-diskusage=$(df -h | awk '$6=="/"{ print $5}')
+diskusage=$(df -h | awk '$6=="/"{ print $5}' | cut -d'%' -f1  )
 echo " Disk : $diskusage"  
+if [ "$diskusage" -gt 80 ]; then
+    echo " WARNING: Disk usage is high!"
+else
+    echo " OK: Disk usage is normal."
+fi
 total_process=$( ps  -e | wc -l ) 
  echo " the total process : $total_process"
 uptime=$(uptime -p ) 
 echo " uptime : $uptime" 
+
 
 
