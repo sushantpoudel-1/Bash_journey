@@ -1,10 +1,10 @@
 #!/bin/bash  
-host=$(whoami) 
+host=$(hostname) 
 time=$(date)
-logged=$(who) 
+logged_users=$(who) 
 echo " the host is :$host" 
 echo " the time logged in  : $time "
-echo " the logged in user is : $logged" 
+echo " the logged in user is : $logged_users" 
 memusage=$(free -h | awk '$1 == "Mem:" {print "total:", $2, "free:", $4, "used:", $3}')
 echo " the total memoryused is : $memusage " 
 diskusage=$(df -h | awk '$6=="/"{ print $5}')
