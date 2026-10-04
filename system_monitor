@@ -3,5 +3,9 @@ memusage=$(free -h | awk '$1 == "Mem:" {print "total:", $2, "free:", $4, "used:"
 echo " the total memoryused is : $memusage " 
 diskusage=$(df -h | awk '$6=="/"{ print $5}')
 echo " the total disk usage by the system : $diskusage"  
+total_process=$( ps  -e | wc -l ) 
+echo " the total process running in the program: $total_process"
+uptime=$(uptime -p ) 
+echo "  the system is  running since : $uptime" 
 
 
