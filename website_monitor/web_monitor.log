@@ -1,0 +1,8 @@
+2026-10-05 17:21:16 - https://example.com - UP - 200 - 1.173161s
+2026-10-05 17:21:23 - https://example.com - UP - 200 - 0.072000s
+2026-10-05 17:50:32 - https://google.com - UP - 301 - 0.184801s
+2026-10-05 17:50:33 - https://example.com - UP - 200 - 0.065121s
+2026-10-05 17:50:33 - https://youtube.com - UP - 301 - 0.258929s
+2026-10-05 17:50:53 - https://google.com - UP - 301 - 0.194029s
+2026-10-05 17:50:53 - https://example.com - UP - 200 - 0.052004s
+2026-10-05 17:51:02 - https://youtubeee.com - DOWN - 000 - 5.690165s

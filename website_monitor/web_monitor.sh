@@ -1,18 +1,28 @@
-#!/bin/bash 
-if [ -z "$1" ]; then 
-echo " Usage: bash website_monitor.sh <URL> "
+#!/bin/bash
+if [ -z "$#" ]; then
+echo "Usage: bash web_monitor.sh <URL>"
 exit 1
 fi
-echo " url:$1 " 
-check=$(curl -s -o /dev/null -w "%{http_code}\n" "$1" )
-if [ "$check" -eq 200 ]; then 
-echo " status:up"
-echo " status:$check"
-response_time=$(curl -s -o /dev/null -w "%{time_total}\n" "$1")
-echo " response-time:$response_time"
+
+for url in "$@" 
+do
+echo "URL: $url"
+check=$(curl -s -o /dev/null -w "%{http_code}" "$url")
+response_time=$(curl -s -o /dev/null -w "%{time_total}" "$url")
+if [ "$check" -ge 200 ] && [ "$check" -le 399 ]; then
+echo "Status: UP"
+ 
 else
-echo "  status:down"
-echo "status-code:$check"
-echo " response-time:$response_time"
+echo "Status: DOWN"
 fi
+echo "Status code: $check"
+echo "Response time: $response_time seconds"
+echo ""
+log="web_monitor.log"
+if [ "$check" -ge 200 ] && [ "$check" -le 399 ]; then
+echo "$(date '+%Y-%m-%d %H:%M:%S') - $url - UP - $check - ${response_time}s" >> "$log"
+else
+echo "$(date '+%Y-%m-%d %H:%M:%S') - $url - DOWN - $check - ${response_time}s" >> "$log"
+fi
+done 
 
