@@ -1,0 +1,9 @@
+#!/bin/bash 
+if [ -z "#" ]; then 
+echo " enter the valid "
+exit 1
+fi 
+for url in "$@" 
+do 
+check=$(curl -s -o /dev/null -w "%{http_code}\n" "$url" 
+echo "url:$ch		
