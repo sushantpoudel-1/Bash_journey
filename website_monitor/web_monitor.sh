@@ -1,4 +1,13 @@
+
 #!/bin/bash
+temp=$(mktemp -d) 
+cleanup() {
+echo " cleaning up the temp file " 
+
+rm -rf "$temp" 
+} 
+trap cleanup EXIT 
+
 if [ -z "$#" ]; then
 echo "Usage: bash web_monitor.sh <URL>"
 exit 1
@@ -69,5 +78,5 @@ else
 echo "$(date '+%Y-%m-%d %H:%M:%S') - $url - DOWN - $check - ${response_time}s" >> "$log"
 fi
 done
- 
+cat "$temp"  
 
