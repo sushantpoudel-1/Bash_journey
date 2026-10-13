@@ -18,7 +18,39 @@ if [ "$status" -eq 0 ]; then
 echo " backup created successfully "
 cp -a "$1"/. "$2"/
 status="$?"
+exit 1
+fi
+date=$(date "+%Y-%m-%d_%H-%M-%S")
+mkdir -p backups
+archive="backups/backup_$date.tar.gz"
+tar -czf "$archive" -C "$2" .
+status="$?"
+if [ "$status" -eq 0 ]; then
+echo " backup created successfully "
+cp -a "$1"/. "$2"/
+status="$?"
 if [ -f "$2/index.html" ]; then
+echo "$date - deployment succeeded" >> "$log"
+else
+echo "deployment verification failed"
+echo "restoring previous version"
+rm -rf "$2"/*
+tar -xzf "$archive" -C "$2"
+if [ "$?" -eq 0 ]; then
+echo "rollback successful"
+else
+echo "rollback failed"
+fi
+exit 1
+fi
+else
+echo "$date - backup failed" >> "$log"
+exit 1
+fi
+
+
+
+
 echo "$date - deployment succeeded" >> "$log"
 else
 echo "deployment verification failed"
