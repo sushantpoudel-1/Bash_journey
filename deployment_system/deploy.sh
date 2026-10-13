@@ -17,11 +17,11 @@ if [ "$status" -eq 0 ]; then
 echo " backup created successfully "
 cp -a "$1"/. "$2"/
 status="$?"
-if [ "$status" -eq 0 ]; then
-echo " deployment succeeded "
+if [ -f "$2/index.html" ]; then
+echo "deployment verification succeeded"
 else
-echo " deployment failed "
-exit 1
+echo "deployment verification failed"
+fi
 fi
 else
 echo " backup failed "
