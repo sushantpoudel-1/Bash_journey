@@ -1,0 +1,6 @@
+[Unit]
+Description=My First Bash Systemd Service
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash /home/dellu/Bash_journey/systemd_practice/service_demo.sh 
